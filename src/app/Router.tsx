@@ -1,9 +1,15 @@
 import type { FC } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import MainLayout from "@/layout/MainLayout";
-import { LoginPage, Home, Profile, EventPage, PublicEvents, SignupPage } from "@/pages";
-import { PublicRoute, ProtectedRoutes, NotFound } from "@/components";
-
+import {
+  LoginPage,
+  Home,
+  Profile,
+  EventPage,
+  PublicEvents,
+  SignupPage,
+} from "@/pages";
+import { ProtectedRoutes, NotFound } from "@/components";
 
 const router = createBrowserRouter([
   {
@@ -19,10 +25,6 @@ const router = createBrowserRouter([
         element: <div>About</div>,
       },
       {
-        path: "/events",
-        element: <PublicEvents />,
-      },
-      {
         path: "/profile",
         element: (
           <ProtectedRoutes>
@@ -31,15 +33,16 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/events/:eventId",
-        element: (
-          <PublicRoute>
-            <EventPage />
-          </PublicRoute>
-        ),
+        path: "events",
+        element: <PublicEvents />,
+      },
+      {
+        path: "events/:eventId",
+        element: <EventPage />,
       },
     ],
   },
+
   {
     path: "/login",
     element: <LoginPage />,
