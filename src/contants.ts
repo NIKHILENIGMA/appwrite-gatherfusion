@@ -10,7 +10,7 @@ export const events: Event[] = [
     createdBy: "Jane Doe",
     isPublic: true,
     maxAttendees: 500,
-    image:
+    poster:
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
   },
   {
@@ -22,7 +22,7 @@ export const events: Event[] = [
     createdBy: "John Smith",
     isPublic: true,
     maxAttendees: 100,
-    image:
+    poster:
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
   },
   {
@@ -34,7 +34,7 @@ export const events: Event[] = [
     createdBy: "Jane Doe",
     isPublic: true,
     maxAttendees: 500,
-    image:
+    poster:
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
   },
   {
@@ -46,7 +46,7 @@ export const events: Event[] = [
     createdBy: "John Smith",
     isPublic: true,
     maxAttendees: 100,
-    image:
+    poster:
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
   },
   {
@@ -58,7 +58,7 @@ export const events: Event[] = [
     createdBy: "Jane Doe",
     isPublic: true,
     maxAttendees: 500,
-    image:
+    poster:
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
   },
   {
@@ -70,7 +70,7 @@ export const events: Event[] = [
     createdBy: "John Smith",
     isPublic: true,
     maxAttendees: 100,
-    image:
+    poster:
       "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
   },
   // Add more events as needed
