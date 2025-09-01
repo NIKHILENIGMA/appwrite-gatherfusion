@@ -1,89 +1,43 @@
-import React from "react";
+import { useState, type FC } from "react";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
-const Profile: React.FC = () => {
+interface EventForm {
+  name: string;
+  date: string;
+  description: string;
+  location: string;
+  time: string;
+}
+
+const Profile: FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [eventForm, setEventForm] = useState<EventForm>({
+    name: "",
+    date: "",
+    description: "",
+    location: "",
+    time: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setEventForm((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--background-color)] text-[var(--text-primary)] font-['Spline_Sans',sans-serif]">
-      {/* Header */}
-      {/* <header className="bg-[var(--card-bg)]/50 backdrop-blur-sm sticky top-0 z-50">
-        <nav className="container mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <a
-              href="#"
-              className="flex items-center gap-2 text-xl font-bold text-[var(--primary-color)]"
-            >
-              <svg
-                className="h-8 w-8"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
-              </svg>
-              <span>Evently</span>
-            </a>
-            <div className="hidden md:flex items-center gap-6">
-              <a className="text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Home</a>
-              <a className="text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Explore</a>
-              <a className="text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Create Event</a>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="relative hidden md:block">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <svg
-                  className="w-5 h-5 text-[var(--text-secondary)]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M21 21L15.803 15.803M15.803 15.803C17.2096 14.3967 18 12.4947 
-                    18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 
-                    3 10.5C3 14.6421 6.35786 18 10.5 18C12.4947 18 
-                    14.3967 17.2096 15.803 15.803V15.803Z"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                  />
-                </svg>
-              </span>
-              <input
-                type="text"
-                placeholder="Search events..."
-                className="w-full pl-10 pr-4 py-2 rounded-full bg-[var(--card-bg)] text-[var(--text-primary)] border border-transparent focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] transition-all"
-              />
-            </div>
-            <button className="p-2 rounded-full hover:bg-[var(--card-bg)] transition-colors">
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M15 17h5l-1.405-1.405A2.032 
-                  2.032 0 0118 14.158V11a6.002 6.002 
-                  0 00-4-5.659V5a2 2 0 10-4 
-                  0v.341A6.002 6.002 0 006 
-                  11v3.159c0 .538-.214 1.055-.595 
-                  1.436L4 17h5m6 0v1a3 3 0 
-                  11-6 0v-1m6 0H9"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
-            </button>
-            <div
-              className="w-10 h-10 rounded-full bg-cover bg-center border-2 border-[var(--primary-color)]"
-              style={{
-                backgroundImage:
-                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBgOEcdijP5LzIsihRStNFqSDXYCY4JURRT3P_728cI3DIjuOXMALFeBC_zBC22l9Yg4xkkaS9FzNSLtI9Klk2i0tGw3SE_KsQdOz72NFYnf5qiCq4VvVxO_KdoHkY5gJlSnEqm4NNlPqhmiTnRUNn5Uomr9HeEtg-L9u7lCu-yUlVRllVE_y2URudHhYwVTGq3viFzTOmZQwyU_Zz82RUdq4rcFQK5FI1WmnioGU7tOaHNB1q9-fIX9YmYEn2Ya0a2SE7POt0KUEE")',
-              }}
-            ></div>
-          </div>
-        </nav>
-      </header> */}
-
+    <div className="flex flex-col min-h-screen bg-background text-secondary-foreground font-['Spline_Sans',sans-serif]">
       {/* Main */}
       <main className="flex-grow container mx-auto px-6 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -118,7 +72,9 @@ const Profile: React.FC = () => {
               </div>
               <h1 className="text-2xl font-bold mt-4">Sophia Clark</h1>
               <p className="text-[var(--text-secondary)]">Event Organizer</p>
-              <p className="text-[var(--text-secondary)] text-sm">Joined in 2021</p>
+              <p className="text-[var(--text-secondary)] text-sm">
+                Joined in 2021
+              </p>
               <button className="mt-6 w-full bg-[var(--primary-color)] text-black px-6 py-3 rounded-full hover:bg-[var(--secondary-color)] transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 font-bold">
                 Edit Profile
               </button>
@@ -164,16 +120,148 @@ const Profile: React.FC = () => {
           </div>
 
           {/* Main content area */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 ">
             {/* Tabs */}
-            <div className="border-b border-[var(--border-color)] mb-6">
+            <div className="border-b border-border mb-6 flex items-center justify-between">
               <nav className="flex space-x-6">
-                <a className="pb-3 border-b-2 border-[var(--primary-color)] text-[var(--primary-color)] font-semibold" href="#">Overview</a>
-                <a className="pb-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--primary-color)] hover:border-[var(--primary-color)] transition-all" href="#">Registered Events</a>
-                <a className="pb-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--primary-color)] hover:border-[var(--primary-color)] transition-all" href="#">Past Events</a>
-                <a className="pb-3 border-b-2 border-transparent text-[var(--text-secondary)] hover:text-[var(--primary-color)] hover:border-[var(--primary-color)] transition-all" href="#">Created Events</a>
+                <a
+                  className="pb-3 border-b-2 border-primary text-primary font-semibold"
+                  href="#"
+                >
+                  Overview
+                </a>
+                <a
+                  className="pb-3 border-b-2 border-transparent text-accent-foreground hover:text-primary hover:border-primary transition-all"
+                  href="#"
+                >
+                  Registered Events
+                </a>
+                <a
+                  className="pb-3 border-b-2 border-transparent text-accent-foreground hover:text-primary hover:border-primary transition-all"
+                  href="#"
+                >
+                  Past Events
+                </a>
               </nav>
+              <div className="pb-1">
+                <Button
+                  variant="default"
+                  className="cursor-pointer"
+                  onClick={() => setIsOpen(true)}
+                >
+                  <Plus className="mr-0" />
+                  Create Event
+                </Button>
+              </div>
             </div>
+
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+              <DialogContent
+                onPointerDownOutside={() => setIsOpen(false)}
+                onEscapeKeyDown={() => setIsOpen(false)}
+              >
+                <DialogHeader>
+                  <DialogTitle>Create Event</DialogTitle>
+                  <div className="mt-4 flex-col flex ">
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        setIsOpen(false);
+                        // handle form submission here
+                      }}
+                      className="space-y-6"
+                    >
+                      <div>
+                        <Label
+                          htmlFor="event-name"
+                          className="block text-sm font-semibold mb-2 text-primary"
+                        >
+                          Name
+                        </Label>
+                        <Input
+                          type="text"
+                          id="event-name"
+                          name="name"
+                          placeholder="Global AI Summit 2025"
+                          value={eventForm.name}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="event-date"
+                          className="block text-sm font-semibold mb-2 text-primary"
+                        >
+                          Date
+                        </label>
+                        <Input
+                          type="date"
+                          id="event-date"
+                          name="date"
+                          placeholder="Select event date"
+                          value={eventForm.date}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label
+                          htmlFor="event-description"
+                          className="block text-sm font-semibold mb-2 text-primary"
+                        >
+                          Description
+                        </Label>
+                        <Textarea
+                          id="event-description"
+                          className=" resize-none"
+                          placeholder="Enter event description"
+                          rows={4}
+                          value={eventForm.description}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="event-location"
+                          className="block text-sm font-semibold mb-2 text-primary"
+                        >
+                          Location
+                        </label>
+                        <Input
+                          id="event-location"
+                          name="location"
+                          placeholder="Mumbai, India"
+                          value={eventForm.location}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label
+                          htmlFor="event-time"
+                          className="block text-sm font-semibold mb-2 text-primary"
+                        >
+                          Time
+                        </Label>
+                        <Input
+                          id="event-time"
+                          name="time"
+                          placeholder="17:00 am to 18:00 pm"
+                          value={eventForm.time}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                    </form>
+                    <Button type="submit" variant="default" className="mt-4">
+                      Next
+                    </Button>
+                  </div>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
 
             {/* Events Sections */}
             <div className="space-y-10">
@@ -181,21 +269,23 @@ const Profile: React.FC = () => {
                 <h2 className="text-2xl font-bold mb-4">Registered Events</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Event card */}
-                  <div className="bg-[var(--card-bg)] rounded-xl overflow-hidden shadow-lg border border-[var(--border-color)] group">
+                  <div className="bg-card rounded-xl overflow-hidden shadow-lg border border-border group">
                     <img
                       src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB-uZh6dWL40cmOIPBVjQiMHsZ-Rz4lD4Rtg-iXM3PD0IPJhCdg8iOWsYQcckBfEQnXPiLOm_yC7MMffUkpPEF76-qT0TJA0aQFhx_ybC7JEWeXPH_yEqddiZNaIS0woAPIXlnpjAf3wZwTOiwuIc-puLomiJ-gVXBEbCljHAovOuz65otPelgaAZf1fDcx6sJprPc5aPCwJHonvVcxH1csimS9b7AZ1mweeT8UrlsR3E7xUf3h_AEsqML0x67eXkUFGeX2A9cdeA"
                       alt="Tech Conference 2024"
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="p-4">
-                      <h3 className="font-bold text-lg">Tech Conference 2024</h3>
+                      <h3 className="font-bold text-lg">
+                        Tech Conference 2024
+                      </h3>
                       <p className="text-sm text-[var(--text-secondary)]">
                         San Francisco, CA
                       </p>
                     </div>
                   </div>
 
-                  <div className="bg-[var(--card-bg)] rounded-xl overflow-hidden shadow-lg border border-[var(--border-color)] group">
+                  <div className="bg-card rounded-xl overflow-hidden shadow-lg border border-border group">
                     <img
                       src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuCIW_7C_prHwxDXzAsRqUKeV1LoIDjK-i6RVIhyT1Sl47m-Ps4rJG8SOpTPkv99L73iBmBgKmPw5oh8qup92c4ilPMHB4y8qn1ldLom5Mylm_0zXhNoumGPx3PAyddxl45ezaaXeAeJPGCPTfaCiXRA_C0ZmiyYSYMJUMiFYgifmHMjE-2-KcAzGK_GwchhxOSxkaQnsrbv1RwUyPQ2860uZDlMOCZdUkdpgVaZxm7BlcenGHsNA0cWsWOHwFfXNQnnDnOu_6e8c"
                       alt="Music Festival 2024"
