@@ -1,11 +1,11 @@
-export type Event = {
+export interface Event {
   id: string;
   title: string;
   description: string;
-  date: string; // ISO string
+  date: string;
   location: string;
+  poster: string;
   createdBy: string;
   isPublic: boolean;
   maxAttendees: number;
-  image: string;
-};
+}
