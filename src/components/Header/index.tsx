@@ -9,6 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Bell, Search } from "lucide-react";
 
 const LINKS = [
   { to: "/", label: "Home" },
@@ -25,7 +26,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="header sticky top-0 w-full h-20 p-2 flex items-center justify-between bg-transparent text-foreground px-20">
+    <header className="header sticky top-0 w-full h-16 p-4 flex items-center justify-between px-20 backdrop-filter backdrop-blur-md opacity-95 text-foreground z-40">
       <div className="flex items-center">
         <h1 className="text-lg font-bold">My Website</h1>
       </div>
@@ -46,36 +47,73 @@ const Header: FC = () => {
         </ul>
       </nav>
       {user ? (
-        <Popover>
-          <PopoverTrigger asChild>
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/shadcn.png"
-                className="cursor-pointer"
-              />
-              <AvatarFallback>
-                {user.name.split(" ")[0].substring(0, 1)}
-                {user.name.split(" ")[1].substring(0, 1)}
-              </AvatarFallback>
-            </Avatar>
-          </PopoverTrigger>
-          <PopoverContent>
-            <div className="flex flex-col gap-2">
-              <Button variant="outline" asChild>
-                <Link to="/settings">Settings</Link>
-              </Button>
-              <Button
-                variant="outline"
-                onClick={handleLogout}
-                className="cursor-pointer"
-              >
-                Logout
-              </Button>
-            </div>
-          </PopoverContent>
-        </Popover>
+        <div className="flex items-center space-x-4 p-2">
+          <div className="p-1 cursor-pointer">
+            <Search size={20} />
+          </div>
+          <div className="p-1 cursor-pointer">
+            <Bell size={20} />
+          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  className="cursor-pointer"
+                />
+                <AvatarFallback>
+                  {user.name.split(" ")[0].substring(0, 1)}
+                  {user.name.split(" ")[1].substring(0, 1)}
+                </AvatarFallback>
+              </Avatar>
+            </PopoverTrigger>
+            <PopoverContent className="z-50">
+              <div className="w-64">
+                <div className="flex flex-col">
+                  <div className="flex items-center space-x-3 py-2">
+                    <div className="p-2">
+                      <img
+                        src="https://github.com/shadcn.png"
+                        alt="avatar"
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center">
+                      <p className="font-medium">{user.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {user.email}
+                      </p>
+                    </div>
+                  </div>
+                  <hr className="my-2 border-muted" />
+                  <div className="flex flex-col gap-1">
+                    <p className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase">
+                      Settings
+                    </p>
+                    <Link
+                      to="/profile"
+                      className="px-3 py-2 rounded hover:bg-muted cursor-pointer transition"
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="px-3 py-2 rounded hover:bg-muted cursor-pointer text-left transition"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
       ) : (
-        <Button variant={'default'} className="cursor-pointer rounded-3xl" asChild>
+        <Button
+          variant={"default"}
+          className="cursor-pointer rounded-3xl"
+          asChild
+        >
           <Link to="/login">Login</Link>
         </Button>
       )}
